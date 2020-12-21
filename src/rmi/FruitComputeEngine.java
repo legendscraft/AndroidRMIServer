@@ -2,7 +2,7 @@ package rmi;
 
 import com.google.gson.Gson;
 
-import in.mrasif.rmiclientdemo.RMIInterface;
+import com.example.mysecondapp.RMIInterface;
 
 import lipermi.exception.LipeRMIException;
 import lipermi.handler.CallHandler;
@@ -59,13 +59,47 @@ class FruitComputeEngine extends UnicastRemoteObject implements RMIInterface {
     public String getAllFruits(){
         FruitModel fruitModel = new FruitModel();
         List<Fruit> fruits = fruitModel.findAllFruits();
-        System.out.println("Found "+fruits.size()+ " Fruits");
-        System.out.println("================================================");
-
-        //
         Gson gson = new Gson();
         String json = gson.toJson(fruits);
         System.out.println(json);
         return json;
+    }
+
+    @Override
+    public String getAllFruitsWithoutPrice(){
+        FruitModel fruitModel = new FruitModel();
+        List<Fruit> fruits = fruitModel.findAllFruitsWithoutPrice();
+        Gson gson = new Gson();
+        String json = gson.toJson(fruits);
+        System.out.println(json);
+        return json;
+    }
+
+    @Override
+    public String getAllFruitsWithPrice(){
+        FruitModel fruitModel = new FruitModel();
+        List<Fruit> fruits = fruitModel.findAllFruitsWithPrice();
+        Gson gson = new Gson();
+        String json = gson.toJson(fruits);
+        System.out.println(json);
+        return json;
+    }
+
+    @Override
+    public boolean updateFruitPrice(int price, int id){
+        FruitModel fruitModel = new FruitModel();
+        return fruitModel.updateFruitPrice(price,id);
+    }
+
+    @Override
+    public boolean addFruitPrice(int price, int id){
+        FruitModel fruitModel = new FruitModel();
+        return fruitModel.addFruitPrice(price,id);
+    }
+
+    @Override
+    public boolean deleteFruitPrice(int id){
+        FruitModel fruitModel = new FruitModel();
+        return fruitModel.deleteFruitPrice(id);
     }
 }
